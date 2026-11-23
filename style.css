@@ -1,0 +1,310 @@
+/* Grundinställningar som gör mått och marginaler enklare att styra */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* === INSTÄLLNINGAR  === */
+:root {
+  --hero-bakgrund: transparent;    /* bakgrundsfärg  */
+  --hero-textfarg: #291812;       /* textfärg */
+  --monster-url: url('images/Croissants.webp'); /* länken till bild taget från Vecteezy*/
+  --monster-storlek: 350px;       /* Hur stort varje mönsterblock ska vara */
+  --monster-synlighet: 0.08;      /* 0.05 (väldigt svagt) till 0.15 (tydligare) */
+}
+
+/* === SJÄLVA HERO-BANNER-KODEN === */
+.hero-banner {
+  position: relative;
+  background-color: var(--hero-bakgrund);
+  color: var(--hero-textfarg);
+  padding: 50px 20px;
+  text-align: center;
+  overflow: hidden;
+  /* Ser till att allt innehåll hamnar ovanpå mönstret */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mönsterlagret i bakgrunden */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Täcker hela ytan */
+  background-image: var(--monster-url);
+  background-repeat: repeat;
+  background-size: var(--monster-storlek);
+  opacity: var(--monster-synlighet);
+  pointer-events: none; /* Gör att mönstret inte blockerar klick på knappar */
+  z-index: 1;
+}
+
+/* Lyfter fram text och knappar framför mönstret */
+.hero-banner > * {
+  position: relative;
+  z-index: 2;
+}
+/* === STIL FÖR RUBRIKER OCH TEXT === */
+.font {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: #3B281E;  
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 40px 0;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+em, .kursiv {
+  font-style: italic;
+}
+/* 3. Underrubrik (h2) - mindre och vänsterställd över brödtexten */
+h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* 4. Mindre rubrik (h3) */
+h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Sidans övergripande utseende */
+body {
+  background-color: #d2b48c; /* Varm beige/tan-färg */
+  font-family: Arial, Helvetica, sans-serif;
+  color: #2c1e16;            /* Mörkbrun textfärg */
+  padding: 20px;             /* Luft runt hela sidans innehåll */
+}
+
+/* Sidhuvudet med introduktionstexten */
+header {
+  background-color: rgba(255, 248, 238, 0.85); /* Lätt genomskinlig bakgrund */
+  border-bottom: 2px solid #e6d5c3; /* Tunn linje under headern */
+  border-top: 2px solid #e6d5c3; /* Tunn linje över headern */
+  padding: 25px 20px;
+  text-align: center;
+  border-radius: 20px; /* Rundade hörn upp och nertill*/
+  margin-bottom: 20px; /* Luft mellan header och nästa sektion */
+  
+  /* Länka till WEBP-fil  */
+  background-image: url("images/Croissants.webp");
+  
+  /* Gör att bilden täcker hela headern snyggt utan att dras ut */
+  background-size: 180px;
+  background-position: center;
+  background-repeat: repeat;
+    /* Tonar ner de svarta linjerna så texten blir lätt att läsa */
+  background-blend-mode: soft-light;
+  mix-blend-mode: multiply;
+}
+/* Behållaren som håller isär boxarna */
+.cookie-grid {
+    justify-content: center;  /* Centrerar boxarna horisontellt */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;              /* Tydligt mellanrum så att varje box blir separat */
+  margin-bottom: 24px;
+}
+
+/* Varje enskild liten pillerbox i menyn*/
+.cookie-grid a {
+  display: inline-block;
+  background-color: #ccae96; /* Varm vit bakgrund på boxen */
+  color: #3e2723;
+  text-decoration: none;
+  font-size: 18px;           /* Gör boxen lite mindre och nättare */
+  font-weight: bold;          /* Lite fetare text för bättre läsbarhet */
+  padding: 14px 28px;         /* Kompakt stoppning inuti boxen */
+  border-radius: 999px;      /* Helt runda kortsidor (pillerform) */
+  border: 1px solid #d7ccc8; /* Tunn ram som definierar boxen */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Lätt skugga som lyfter boxen */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+/* Effekt när man för musen över en box */
+.cookie-grid a:hover {
+  background-color: #3e2723;
+  color: #ffffff;
+  border-color: #3e2723;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+/* Specifika stilar för "Tillbaka till toppen"-knappen */
+    .pillerbox {
+      display: inline-block;
+      margin-top: 16px;
+      margin-bottom: 40px;
+      text-decoration: none;
+      border-radius: 9999px;
+      padding: 12px 26px;
+      background-color: #3B281E;
+      color: #dbc191;
+      border: 2px solid #dbc191;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(59, 40, 30, 0.18);
+      transition: all 0.25s ease;
+    }
+
+    .pillerbox:hover {
+      background-color: #dbc191;
+      color: #3B281E;
+      transform: translateY(-2px);
+    }
+
+    /* Stil för brödtexten som är lättläst och inbjudande */
+    .brodtext {
+  /* Klassiskt serif-typsnitt som passar fika och tradition */
+  font-family: Georgia, "Times New Roman", serif;
+  
+  font-size: 34.4px;       
+  line-height: 1.75;        /* Extra luftigt för lätt läsning */
+  color: #2c2825;           /* Varm mörkbrun/svart ton */
+  
+  max-width: 58ch;          /* Lagom bredd för just det här stycket */
+  margin: 0 auto;           /* Centrerar textblocket på sidan */
+  
+  text-wrap: pretty;        /* Gör radbrytningarna balanserade */
+}
+
+/* Bonus: En dekorativ stor första bokstav (Anfang) */
+.brodtext::first-letter {
+  font-size: 3.2rem;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.6rem;
+  margin-top: 0.1rem;
+  color: #8b5a2b;           /* Kanel- eller kaffebrun accentfärg */
+  font-weight: bold;
+}
+
+  /* Stil för brödtexten som är lättläst och inbjudande */
+    .brodtext1 {
+  /* Klassiskt serif-typsnitt som passar fika och tradition */
+  font-family: Georgia, "Times New Roman", serif;
+  
+  font-size: 24px; 
+  font-weight: bold;      
+  line-height: 1.75;        /* Extra luftigt för lätt läsning */
+  color: #3d2b1f;           /* Varm mörkbrun/svart ton */
+  
+  max-width: 58ch;          /* Lagom bredd för just det här stycket */
+  margin: 0 auto;           /* Centrerar textblocket på sidan */
+  
+  text-wrap: pretty;        /* Gör radbrytningarna balanserade */
+}
+
+article.recept {
+  display: grid;
+  /* Vänsterkolumnen får gott om plats, högerkolumnen anpassas efter bilden */
+  grid-template-columns: minmax(320px, 55ch) auto; 
+  column-gap: 48px;         /* Luft mellan text och bild */
+  align-items: start;
+  
+
+  /* Fast marginal på 40px från vänsterkanten, och 64px luft ner till nästa recept */
+  margin: 0 40px 64px 40px;    
+  padding-right: 20px;      /* Skyddar mot högerkanten på små skärmar */
+}
+
+/* 2. Brödtext och listor i receptet */
+.recept p,
+.recept li {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;     /* 19-20px är superlättläst */    
+  line-height: 1.65;
+  color: #3B281E;
+}
+
+/* 3. Ta bort indraget på brödtexten så den linjerar med "Drömmar"-rubriken */
+.recept p {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* 4. Linjera punktlistan med rubriken "Ingredienser" */
+.recept ul,
+.recept ol {
+  padding-left: 1.2rem;     /* Drar in punkterna så de linjerar snyggt */
+  margin-top: 0.5rem;
+}
+
+.recept li {
+  margin-bottom: 0.4rem;
+}
+/* 1. Tvingar all text, rubriker och listor att hålla sig i vänsterkolumnen */
+article.recept > * {
+  grid-column: 1;
+}
+
+/* 2. Placerar bara bilden (figure eller img) i högerkolumnen, längst upp */
+article.recept > figure,
+article.recept > img {
+  grid-column: 2;
+  grid-row: 1 / span 6; /* Låter bilden ta plats på höjden utan att trycka ner texten */
+  margin: 0; /* Tar bort standardmarginalen som annars kan ge oönskat glapp */
+  width: 100%; /* Gör att bilden fyller sin kolumn och inte blir för liten */
+}
+
+.recept img {
+  width: 100%;         /* Gör att bilden fyller sin kolumn och inte blir för liten */
+  height: auto;        /* Behåller bildens proportioner */
+  max-height: 600px;   /* Begränsar bildens höjd så den inte blir för dominerande */
+  object-fit: cover;     /* Beskär bilden snyggt om den är för stor */
+  border-radius: 16px; /* Ändra till t.ex. 8px för mindre rundning eller 24px för mer */
+  display: block;      /* Tar bort det lilla oönskade glappet under bilden mot bildtexten */
+}
+/* Gör att bilden lägger sig snyggt överst igen på mobilskärmar */
+@media (max-width: 800px) {
+  article {
+    grid-template-columns: 1fr;
+  }
+  article > figure {
+    grid-column: 1;
+    grid-row: 2; /* Lägger bilden direkt under rubriken på mobilen */
+    margin-bottom: 16px;
+  }
+}
+.bildrad {
+  display: flex;
+  justify-content: center; /* Centrerar bilderna horisontellt */
+  gap: 20px;               /* Luft mellan bilderna */
+  margin-bottom: 40px;    /* Luft under bildraden */
+  align-items: stretch; /* Gör att bilderna sträcker sig lika högt */
+}
+.bild-paket {
+  width: 100%;            /* Gör att bilden fyller sin behållare */
+  height: auto;           /* Behåller bildens proportioner */
+  margin: 0;             /* Tar bort standardmarginalen */
+  border-radius: 12px;    /* Rundar hörnen på bilderna */
+display: flex;
+  flex-direction: column; /* Gör att figcaption hamnar under bilden */
+  align-items: center;    /* Centrerar bilden och texten */
+
+}
+.bild-paket img {
+  width: 100%;            /* Gör att bilden fyller sin behållare */
+  height: auto;           /* Behåller bildens proportioner */
+  border-radius: 12px;    /* Rundar hörnen på bilderna */
+  object-fit: cover;      /* Beskär bilden snyggt om den är för stor */
+}
+.css-bild {
+  width: 100%;            /* Gör att bilden fyller sin behållare */
+  aspect-ratio: 4 / 3;    /* Behåller bildens proportioner */
+  border-radius: 12px;    /* Rundar hörnen på bilderna */
+  background-image: url('images/conor-brown-unsplash.webp'); /* Länken till bild taget från unsplash */
+  background-size: cover; /* Gör att bilden täcker hela div:en */
+  
+}
